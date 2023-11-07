@@ -6,44 +6,47 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title> @yield('title', 'Redakcja') </title>
-        
+
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         @stack('styles')
-        
+
     </head>
 
     <body>
         <header id="site-header">
-            <h1 class="logo">Redakcja</h1>
+            <a href="{{ route('home') }}">
+                <h1 class="logo">Redakcja</h1>
+            </a>
+
             <nav>
 
-                <div class="icon-hover">
+                <a class="icon-hover" href={{ route('categories') }}>
                     <span class="icon-title">Kategorie</span>
                     <span class="icon">
                         <img src={{ asset('icons/category.png') }}>
                     </span>
-                </div>
+                </a>
 
-                <div class="icon-hover">
+                <a class="icon-hover">
                     <span class="icon-title">Na czasie</span>
                     <span class="icon">
                         <img src={{ asset('icons/trend.png') }}>
                     </span>
-                </div>
+                </a>
 
-                <div class="icon-hover">
+                <a class="icon-hover">
                     <span class="icon-title">Szybkie newsy</span>
                     <span class="icon">
                         <img src={{ asset('icons/news.png') }}>
                     </span>
-                </div>
+                </a>
 
-                <div class="icon-hover">
+                <a class="icon-hover">
                     <span class="icon-title">Szukaj</span>
                     <span class="icon">
                         <img src={{ asset('icons/search.png') }}>
                     </span>
-                </div>
+                </a>
 
             </nav>
             <img class="profile" src={{ asset('icons/profile.png') }}>
