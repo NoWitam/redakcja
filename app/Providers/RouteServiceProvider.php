@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Category;
 use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
@@ -24,6 +26,21 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+
+            // add custom resolution for binding 'subsubcategory'
+        Route::bind('subcategory', function($value, $route) {
+
+            if ($category = Category::where($route->bindingFields()['category'], $route->parameter('category'))->first()) {
+
+                if ($subcategory = $category->subcategories()->where($route->bindingFields()['subcategory'], $route->parameter('subcategory'))->first()) {
+                    return $subcategory;
+                }
+
+            }
+
+            throw new ModelNotFoundException();
+        });
+
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
