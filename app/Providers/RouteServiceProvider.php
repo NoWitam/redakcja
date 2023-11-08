@@ -26,8 +26,6 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-
-            // add custom resolution for binding 'subsubcategory'
         Route::bind('subcategory', function($value, $route) {
 
             if ($category = Category::where($route->bindingFields()['category'], $route->parameter('category'))->first()) {
