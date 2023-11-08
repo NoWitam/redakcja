@@ -1,24 +1,28 @@
-@if(!$small)
-    <header id="breadcrumb-header">
-@endif
-
-<aside id="breadcrumb">
-    @foreach ($navigation as $link)
-        <a title="Przejdź do {{ $link['name'] }}."
-            @if($loop->last) class="active" @else href="{{ $link['url'] }}" @endif
-        >
-            {{ $link['name'] }}
-        </a>
-    @endforeach
-</aside>
-
-@if(!$small)
-
-    <h1> {{ end($navigation)['name'] }} </h1>
-
-    @if(isset($description))
-        <p> {{ $description }} </p>
+@unless ($breadcrumbs->isEmpty())
+    @if(!$small)
+        <header id="breadcrumb-header">
     @endif
 
-    </header>
-@endif
+    <aside id="breadcrumb">
+        @foreach ($breadcrumbs as $breadcrumb)
+            <a title="Przejdź do {{ $breadcrumb->title }}."
+                @if($loop->last) class="active" @else href="{{ $breadcrumb->url }}" @endif
+            >
+                {{ $breadcrumb->title }}
+            </a>
+        @endforeach
+    </aside>
+
+    @if(!$small)
+
+        <h1> {{ $breadcrumbs->last()->title }} </h1>
+
+        @if(isset($breadcrumbs->last()->description))
+            <p> {{ $breadcrumbs->last()->description }} </p>
+        @endif
+
+        </header>
+    @endif
+@endunless
+
+
