@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,12 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('app.welcome');
-})->name('home');
+Route::get('/', [ArticleController::class, 'index'])->name('articles');
 
 Route::get('kategorie', [CategoryController::class, 'index'])->name('categories');
 
 Route::get('/kategorie/{category:slug}', [CategoryController::class, 'show'])->name('category');
 
 Route::get('/kategorie/{category:slug}/{subcategory:slug}', [CategoryController::class, 'showSub'])->name('subcategory');
+
+Route::get('/artykuly/{article:slug}', [ArticleController::class, 'show'])->name('article');

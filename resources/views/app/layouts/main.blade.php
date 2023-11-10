@@ -14,7 +14,7 @@
 
     <body>
         <header id="site-header">
-            <a href="{{ route('home') }}">
+            <a href="{{ route('articles') }}">
                 <h1 class="logo">Redakcja</h1>
             </a>
 
@@ -56,7 +56,7 @@
                 @yield('content')
         </div>
 
-
+        <script src="https://cdn.jsdelivr.net/npm/simple-parallax-js@5.5.1/dist/simpleParallax.min.js"></script>
         @stack('scripts')
     </body>
 
