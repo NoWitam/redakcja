@@ -11,7 +11,7 @@
                 <div class="category-item article-trailer article-trailer-has-hover">
                     <a class="category-link" href="{{ route('category', ['category' => $category['slug']]) }}"></a>
                     <div class="category-details">
-                        <h1> {{ $category['name'] }} ({{ $category['articles_count'] }})</h1>
+                        <h1> {{ $category['name'] }} ({{ $category['own_articles_count'] + $category['sub_articles_count']  }})</h1>
                     </div>
                     <span class="category-hover">{{ $category['description'] }}</span>
                 </div>

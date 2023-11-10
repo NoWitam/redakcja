@@ -5,6 +5,7 @@ namespace App\View\Components;
 use App\Services\Route;
 use Closure;
 use Diglactic\Breadcrumbs\Breadcrumbs;
+use Diglactic\Breadcrumbs\Exceptions\InvalidBreadcrumbException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Config;
 use Illuminate\View\Component;
@@ -27,7 +28,12 @@ class Breadcrumb extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.breadcrumb', ['breadcrumbs' => Breadcrumbs::generate()]);
+        try {
+            return view('components.breadcrumb', ['breadcrumbs' => Breadcrumbs::generate()]);
+        } catch (InvalidBreadcrumbException $e) {
+            return "";
+        };
+
     }
 
 }
