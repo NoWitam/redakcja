@@ -42,6 +42,8 @@
                     </div>
                 @endforeach
             </div>
+
+            <livewire:reaction :$article />
         </main>
 
         <aside id="sidebar">
