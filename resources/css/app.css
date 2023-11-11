@@ -739,7 +739,6 @@ article {
     padding-left: 50px;
     position: sticky;
     top: 60px;
-    background-color: red;
     max-height: calc(100vh - 60px - 80px);
 }
 
@@ -756,4 +755,68 @@ article {
     font-size: 1.7rem;
     line-height: 1.7;
     font-weight: 700;
+}
+
+#reaction {
+    position: relative;
+    display: block;
+    margin-top: 40px;
+    padding: 30px 10px;
+    border: 1px solid rgba(0, 0, 0, .05);
+    border-radius: 10px;
+}
+
+.reaction-title {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 1.5rem;
+    line-height: 1.5;
+    font-weight: 700;
+}
+
+.reaction-content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.reaction-item {
+    position: relative;
+    flex: 0 0 100px;
+    max-width: 100px;
+    cursor: pointer;
+    text-align: center;
+    font-weight: 700;
+}
+
+.reaction-item-icon {
+    width: 55px;
+    margin: auto;
+    transition: transform .3s cubic-bezier(0.36, 0.8, 0.41, 1);
+    transform: scale(1) rotate(0deg);
+}
+
+.reaction-item-title {
+    margin-top: 5px;
+    display: block;
+    font-size: 1.2rem;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+.reaction-item-count {
+    font-size: 1.4rem;
+    line-height: 1.5;
+    display: block;
+    text-align: center;
+    background-color: rgba(0, 0, 0, .025);
+    border-radius: 5px;
+}
+
+.reaction-item:hover .reaction-item-icon{
+    transform: scale(1.4) rotate(-20deg);
+}
+
+.reaction-item-count.active {
+    background-color: #f9d045;
+    color: var(--colorText)
 }

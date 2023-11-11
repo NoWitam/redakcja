@@ -3,12 +3,13 @@
 namespace App\Models;
 
 use App\Observers\SlugObserver;
+use App\Traits\Reactionable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Article extends Model
+class Article extends Model implements \App\Interfaces\Reactionable
 {
-    use HasFactory;
+    use HasFactory, Reactionable;
 
     protected $casts = [
         'published_at' => 'date'
