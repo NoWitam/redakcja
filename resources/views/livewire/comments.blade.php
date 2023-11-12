@@ -24,8 +24,9 @@
         <button>Skomentuj</button>
     </div>
     <div class="comments-content">
+
         @foreach ($comments as $comment)
-            <div class="comment intialize" key="{{ "commentable-" . $comment->id}}" wire:ignore>
+            <div class="comment intialize">
                 <div class="comment-author">
                     <img src="https://flarrow.pl/wp-content/uploads/2023/03/IMG_6224-370x250.jpeg">
                     <h3 class="comment-author-name">{{ $comment->user->name }}</h3>
@@ -41,8 +42,11 @@
                 </div>
             </div>
         @endforeach
+
         @if($hasMorePages)
-            <div x-intersect="$wire.loadComments()"></div>
+            <div x-intersect="$wire.loadComments()">
+                <img src="https://i.gifer.com/ZKZg.gif" alt="Trwa ładowanie...">
+            </div>
         @endif
     </div>
 

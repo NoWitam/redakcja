@@ -62,7 +62,7 @@ class Comments extends Component
             if(in_array($sortType, $this->sortTypes)) {
                 $this->sortType = $sortType;
                 $this->nextCursor = null;
-                $this->commentsHTML = view('livewire.parts.comments', ['comments' => $this->getComments()])->render();
+                $this->comments = new Collection();
                 return;
             }
         }
@@ -84,7 +84,7 @@ class Comments extends Component
         if($this->sortType === 'best') {
             $comments->orderBy('content');
         }
-        //dump($this->sortType);
+
         return $comments;
     }
 
