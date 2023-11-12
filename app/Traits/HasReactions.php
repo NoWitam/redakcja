@@ -3,7 +3,7 @@
 namespace App\Traits;
 use App\Models\Reaction;
 
-trait Reactionable
+trait HasReactions
 {
     public function reactions()
     {

@@ -2,10 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Article;
+use Faker\Factory;
 use Illuminate\Database\Seeder;
+use App\Models\Article;
 
-class ReactionSeeder extends Seeder
+class CommentsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,17 +15,18 @@ class ReactionSeeder extends Seeder
     {
         $articles = Article::all();
         $this->command->getOutput()->progressStart(count($articles));
+        $faker = Factory::create('pl_PL');
 
         foreach($articles as $article)
         {
-            $reactionCount = random_int(15000, 30000);
+            $commentsCount = random_int(30, 1000);
 
-            for($i=$article->reactions()->count()+1; $i <= $reactionCount; $i++)
+            for($i=$article->comments()->count()+1; $i <= $commentsCount; $i++)
             {
-                $article->reactions()->updateOrCreate([
-                    "user_id" => $i,
+                $article->comments()->updateOrCreate([
+                    "user_id" => 1,
                 ], [
-                    "type" => random_int(1, 6),
+                    "content" => $faker->realText(random_int(10, 500)),
                 ]);
             }
 
@@ -32,5 +34,6 @@ class ReactionSeeder extends Seeder
         }
 
         $this->command->getOutput()->progressFinish();
+
     }
 }

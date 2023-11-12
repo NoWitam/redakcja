@@ -2,20 +2,25 @@
 
 namespace App\Livewire;
 
-use App\Models\Article;
+use App\Interfaces\Reactionable;
 use App\Services\ReactionService;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Locked;
 use Livewire\Component;
 
 class Reaction extends Component
 {
-    public Article $article;
-    private $xd = '123';
+    #[Locked]
+    public Reactionable $reactionable;
+    #[Locked]
+    public bool $small = false;
+    public string $id;
+
     public function react($reaction)
     {
         if(Auth::check()) {
             if($reaction = \App\Enums\ReactionType::tryFrom($reaction)) {
-                $this->article->reactions()->updateOrCreate([
+                $this->reactionable->reactions()->updateOrCreate([
                     'user_id' => Auth::id(),
                 ], [
                     'type' => $reaction
@@ -28,8 +33,8 @@ class Reaction extends Component
 
     public function render()
     {
-        return view('livewire.reaction', [
-            'reactions' => ReactionService::getCountFrom($this->article)
+        return view($this->small ? 'livewire.reaction-small' : 'livewire.reaction' , [
+            'reactions' => ReactionService::getCountFrom($this->reactionable)
         ]);
     }
 }

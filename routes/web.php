@@ -2,8 +2,11 @@
 
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentController;
 use App\Models\Article;
+use App\Models\Comment;
 use App\Models\User;
+use Illuminate\Pagination\Cursor;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +37,9 @@ Route::get('/zaloguj', function() {
 })->name('login');
 
 Route::get('test', function () {
-    $article = Article::find(1);
-    $article->reactions()->select(DB::raw('COUNT(*) as count'))->groupBy('type')->get();
+    $comments = Comment::cursorPaginate(12, ['*'], 'cursor', Cursor::fromEncoded(null));
+    dd($comments);
 });
+
+
+Route::get('/parts/comments', [CommentController::class, 'index'])->name('parts.comments');
