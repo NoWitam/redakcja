@@ -43,7 +43,9 @@
                 @endforeach
             </div>
 
-            <livewire:reaction :$article />
+            @livewire("reaction", ["reactionable" => $article], key("reactionable-" . $article::class . "-" . $article->id))
+            @livewire("comments", ["commentable" => $article], key("commentable-" . $article::class . "-" . $article->id))
+
         </main>
 
         <aside id="sidebar">

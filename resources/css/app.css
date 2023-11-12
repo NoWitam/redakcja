@@ -1,6 +1,6 @@
 :root {
     --colorMain: #20202b;
-    --colorSecond: brown;
+    --colorSecond: #f9d045;
     --colorText: white;
 }
 
@@ -779,6 +779,28 @@ article {
     justify-content: space-between;
 }
 
+.reaction-content.small {
+    justify-content: flex-start;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.reaction-content.small .reaction-item {
+    display: flex;
+    flex-direction: row;
+    flex: 0 0 auto;
+    margin-right: 15px;
+}
+
+.reaction-content.small .reaction-item-count {
+    margin-left: 10px;
+    width: 25px;
+}
+
+.reaction-content.small .reaction-item-icon {
+    width: 25px;
+}
+
 .reaction-item {
     position: relative;
     flex: 0 0 100px;
@@ -820,3 +842,152 @@ article {
     background-color: #f9d045;
     color: var(--colorText)
 }
+
+#comments {
+    margin-top: 40px;
+}
+
+.comments-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.6rem;
+    line-height: 1.6;
+    font-weight: 700;
+}
+
+
+#comments .line {
+    height: 100%;
+    width: 0;
+    margin-right: 7px;
+    margin-left: 7px;
+    content: '';
+    letter-spacing: 0;
+    opacity: .6;
+    border-left: 2px black solid;
+}
+
+#comments .comments-sort span:not(.line) {
+    font-size: 1.2rem;
+    line-height: 1.2;
+    font-weight: 600;
+    cursor: pointer;
+    opacity: .6;
+}
+
+#comments .comments-sort span.active {
+    opacity: 1;
+    color: var(--colorSecond);
+}
+
+#comments .comments-content {
+    display: flex !important;
+    flex-direction: column;
+    margin-top: 45px;
+}
+
+#comments .comment {
+    margin-bottom: 45px;
+}
+
+#comments .comment-author {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+#comments .comment-author img {
+    height: 35px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+}
+
+#comments .comment-author-name {
+    font-weight: 700;
+    font-size: 1.4rem;
+    line-height: 1.4;
+}
+
+#comments .comment-time {
+    font-size: 1rem;
+    line-height: 1;
+    opacity: .7;
+}
+
+#comments .comment-content {
+    margin-top: 15px;
+    font-size: 1.2rem;
+    line-height: 1.2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+
+#comments .comment-body {
+    margin-left: 45px;
+}
+
+#comments input[type="checkbox"]:not(:checked) + .comment-content {
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+}
+
+#comments .comment .show-more {
+    display: none;
+    margin-top: 5px;
+    font-size: 1.2rem;
+    line-height: 1.2;
+    font-weight: 700;
+    cursor: pointer;
+    opacity: .6;
+}
+
+#comments input[type="checkbox"]:checked ~ .show-more::after {
+    content: "Pokaż mniej"
+}
+
+#comments input[type="checkbox"]:not(:checked) ~ .show-more::after {
+    content: "Pokaż więcej"
+}
+
+#comments .comment .show-more:hover::after {
+    border-bottom: 1px solid black;
+}
+
+#comments .comments-form input[type="text"] {
+    font-size: 1.3rem;
+    line-height: 1.3;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.452);
+    width: calc(100% - 200px);
+    padding-bottom: 2px;
+    margin-top: 25px;
+    transition: border-bottom .4s;
+}
+
+#comments .comments-form input[type="text"]:focus {
+    border-bottom: 2px solid black;
+}
+
+#comments .comments-form button {
+    outline: none;
+    border: 0;
+    font-size: 1.3rem;
+    line-height: 1.3;
+    text-align: center;
+    padding: 15px 25px;
+    width: 150px;
+    margin-left: 25px;
+    cursor: pointer;
+    border-radius: 25px;
+    background-color: #f9d045;
+    transition: background-color .4s;
+}
+
+#comments .comments-form button:hover {
+    background: #f9cf45a1;;
+}
+
