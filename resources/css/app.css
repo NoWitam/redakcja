@@ -146,6 +146,7 @@ header > nav {
     min-width: 800px;
     flex-grow: 2;
     flex-shrink: 2;
+    height: 500px;
 }
 
 .podium-right {
@@ -155,12 +156,20 @@ header > nav {
     width: clamp(420px, 420px, 800px);
     flex-grow: 1;
     flex-shrink: 2;
+}
 
+.podium-right .article-trailer  > .article-details > h1 {
+    font-size: 2.2rem;
+}
+
+.podium-right .podium-item {
+    height: 225px;
 }
 
 .podium-item > img {
     height: 100%;
     width: 100%;
+    object-fit: cover;
 }
 
 .article-trailer {
