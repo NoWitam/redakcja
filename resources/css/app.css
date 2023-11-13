@@ -139,7 +139,7 @@ header > nav {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    height: calc(100vh - 60px - 150px);
+    min-height: calc(100vh - 60px - 150px);
 }
 
 .podium > .podium-item {
