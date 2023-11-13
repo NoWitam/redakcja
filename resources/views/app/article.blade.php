@@ -6,7 +6,7 @@
     <header id="article-header">
         <div class="parallax">
             <div class="parallax-init">
-                <img alt="{{ $article->name }}" src="https://flarrow.pl/wp-content/uploads/2023/04/IMG_6659-1110x750.jpeg">
+                <img alt="{{ $article->name }}" src="https://www.cebit.pl/userdata/public/assets/blog/kupno-podzespolow-do-komputera%201b.jpg">
             </div>
         </div>
         <div class="article-header-content">
