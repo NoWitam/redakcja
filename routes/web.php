@@ -2,11 +2,9 @@
 
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\CommentController;
-use App\Models\Article;
-use App\Models\Comment;
+use App\Models\ReaderSession;
+use App\Models\ReaderSessionView;
 use App\Models\User;
-use Illuminate\Pagination\Cursor;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -29,9 +27,9 @@ Route::get('/kategorie/{category:slug}', [CategoryController::class, 'show'])->n
 
 Route::get('/kategorie/{category:slug}/{subcategory:slug}', [CategoryController::class, 'showSub'])->name('subcategory');
 
-Route::get('/artykuly/{article:slug}', [ArticleController::class, 'show'])->name('article');
+Route::get('/artykuly/{article:slug}', [ArticleController::class, 'show'])->name('article')->middleware('logView:article');
 
-Route::get('/artykuly/{article:slug}/advertisement/{order}', [ArticleController::class, 'advertisement'])->name('article.advertisement');
+Route::get('/artykuly/{article:slug}/advertisement/{section:order}', [ArticleController::class, 'advertisement'])->name('article.advertisement')->middleware('logView:section');;
 
 Route::get('/zaloguj', function() {
     Auth::login(User::find(1));
@@ -39,6 +37,5 @@ Route::get('/zaloguj', function() {
 })->name('login');
 
 Route::get('test', function () {
-    $comments = Comment::cursorPaginate(12, ['*'], 'cursor', Cursor::fromEncoded(null));
-    dd($comments);
+
 });
