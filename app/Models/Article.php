@@ -30,7 +30,7 @@ class Article extends Model implements Reactionable, Commentable
 
     public function sections()
     {
-        return $this->hasMany(ArticleSection::class);
+        return $this->hasMany(ArticleSection::class)->orderBy('order');
     }
 
     public static function boot()

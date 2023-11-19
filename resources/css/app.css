@@ -1,7 +1,10 @@
 :root {
     --colorMain: #20202b;
     --colorSecond: #f9d045;
+    --colorSecondOpacity: #f9cf45a1;
     --colorText: white;
+    --colorLoad: #368cd5;
+    --colorLoadOpacity: #368bd546;
 }
 
 * {
@@ -835,8 +838,8 @@ article {
 }
 
 .reaction-item-count {
-    font-size: 1.4rem;
-    line-height: 1.5;
+    font-size: 1.4em;
+    line-height: 1.4;
     display: block;
     text-align: center;
     background-color: rgba(0, 0, 0, .025);
@@ -848,11 +851,11 @@ article {
 }
 
 .reaction-item-count.active {
-    background-color: #f9d045;
+    background-color: var(--colorSecond);
     color: var(--colorText)
 }
 
-#comments {
+.comments {
     margin-top: 40px;
 }
 
@@ -860,13 +863,13 @@ article {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 1.6rem;
+    font-size: 1.6em;
     line-height: 1.6;
     font-weight: 700;
 }
 
 
-#comments .line {
+.comments .line {
     height: 100%;
     width: 0;
     margin-right: 7px;
@@ -877,56 +880,55 @@ article {
     border-left: 2px black solid;
 }
 
-#comments .comments-sort span:not(.line) {
-    font-size: 1.2rem;
+.comments .comments-sort span:not(.line) {
+    font-size: 1.2em;
     line-height: 1.2;
     font-weight: 600;
     cursor: pointer;
     opacity: .6;
 }
 
-#comments .comments-sort span.active {
+.comments .comments-sort span.active {
     opacity: 1;
     color: var(--colorSecond);
-}
+}c
 
-#comments .comments-content {
+.comments .comments-content {
     display: flex !important;
     flex-direction: column;
     margin-top: 45px;
 }
 
-#comments .comment {
+.comments .comment {
     margin-bottom: 45px;
 }
 
-#comments .comment-author {
+.comments .comment-author {
     display: flex;
     align-items: center;
     gap: 7px;
 }
 
-#comments .comment-author img {
+.comments .comment-author img {
     height: 35px;
     aspect-ratio: 1/1;
     border-radius: 50%;
 }
 
-#comments .comment-author-name {
+.comments .comment-author-name {
     font-weight: 700;
-    font-size: 1.4rem;
+    font-size: 1.4em;
     line-height: 1.4;
 }
 
-#comments .comment-time {
-    font-size: 1rem;
+.comments .comment-time {
+    font-size: 1em;
     line-height: 1;
     opacity: .7;
 }
 
-#comments .comment-content {
-    margin-top: 15px;
-    font-size: 1.2rem;
+.comments .comment-content {
+    font-size: 1.2em;
     line-height: 1.2;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -934,39 +936,50 @@ article {
     -webkit-box-orient: vertical;
 }
 
-#comments .comment-body {
+.comments .comment-body {
     margin-left: 45px;
 }
 
-#comments input[type="checkbox"]:not(:checked) + .comment-content {
+.comments input[type="checkbox"]:not(:checked) + .comment-content {
     -webkit-line-clamp: 4;
     line-clamp: 4;
 }
 
-#comments .comment .show-more {
+.comments .comment .show-more {
     display: none;
     margin-top: 5px;
-    font-size: 1.2rem;
+    font-size: 1.2em;
     line-height: 1.2;
     font-weight: 700;
     cursor: pointer;
     opacity: .6;
 }
 
-#comments input[type="checkbox"]:checked ~ .show-more::after {
+.comments input[type="checkbox"]:checked ~ .show-more::after {
     content: "Pokaż mniej"
 }
 
-#comments input[type="checkbox"]:not(:checked) ~ .show-more::after {
+.comments input[type="checkbox"]:not(:checked) ~ .show-more::after {
     content: "Pokaż więcej"
 }
 
-#comments .comment .show-more:hover::after {
+.comments .comment .show-more:hover::after {
     border-bottom: 1px solid black;
 }
 
-#comments .comments-form input[type="text"] {
-    font-size: 1.3rem;
+.comments .comment-social {
+    display: flex;
+    justify-content: space-between;
+}
+
+.comments .comments-form {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.comments .comments-form input[type="text"] {
+    font-size: 1.3em;
     line-height: 1.3;
     outline: none;
     border: none;
@@ -975,28 +988,110 @@ article {
     padding-bottom: 2px;
     margin-top: 25px;
     transition: border-bottom .4s;
+    flex: 1 1;
 }
 
-#comments .comments-form input[type="text"]:focus {
+.comments .comments-form input[type="text"]:focus {
     border-bottom: 2px solid black;
 }
 
-#comments .comments-form button {
+.clickable {
     outline: none;
     border: 0;
-    font-size: 1.3rem;
-    line-height: 1.3;
     text-align: center;
     padding: 15px 25px;
-    width: 150px;
-    margin-left: 25px;
     cursor: pointer;
     border-radius: 25px;
-    background-color: #f9d045;
+    background-color: var(--colorSecond);
     transition: background-color .4s;
 }
 
-#comments .comments-form button:hover {
-    background: #f9cf45a1;;
+.clickable:hover {
+    background: var(--colorSecondOpacity) !important;
 }
+
+.comments .comments-form button {
+    flex: 1 0;
+    font-size: 1.3em;
+    line-height: 1.3;
+    max-width: 150px;
+    margin-left: 25px;
+}
+
+.comments.small {
+    margin-top: 10px;
+    font-size: 0.8rem;
+}
+
+.comments.small .comment-author img {
+    height: 26px;
+}
+
+.comments.small .comments-form {
+    display: none;
+}
+
+.comments.small .comments-form button {
+    padding: 12px 18px;
+    max-width: 120px;
+    margin-left: 12px;
+    background: transparent;
+}
+
+.comments.small .comments-form button.cancel {
+    max-width: 80px;
+}
+
+.comments.small .comments-form input[type="text"] {
+    margin-top: 10px;
+}
+.comments.small .reaction-item-icon {
+    width: 20px;
+}
+
+.comments.small .comment {
+    margin-bottom: 10px;
+}
+
+button[role="addSubComment"] {
+    font-size: 1em;
+    line-height: 1;
+    max-width: 150px;
+    margin-left: 25px;
+}
+
+.loadable {
+    background: transparent;
+    color: var(--colorLoad) !important;
+}
+
+.loadable:hover {
+    background: var(--colorLoadOpacity) !important;
+}
+
+button[role="loadMore"] {
+    font-size: 1.3rem;
+    line-height: 1.1;
+    font-weight: 700;
+}
+
+button[role="loadMore"]:not(.active)::before {
+    content: "▼";
+}
+
+button[role="loadMore"].active::before {
+    content: "▲";
+}
+
+button[role="loadMore"]:not(.active) + .comments-content {
+    display: none;
+}
+
+.advertisement {
+    width: 60%;
+    margin: 50px auto;
+    display: block;
+}
+
+
 

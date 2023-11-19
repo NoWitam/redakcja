@@ -5,16 +5,12 @@ namespace App\Livewire;
 use App\Interfaces\Reactionable;
 use App\Services\ReactionService;
 use Illuminate\Support\Facades\Auth;
-use Livewire\Attributes\Locked;
 use Livewire\Component;
 
 class Reaction extends Component
 {
-    #[Locked]
     public Reactionable $reactionable;
-    #[Locked]
     public bool $small = false;
-    public string $id;
 
     public function react($reaction)
     {

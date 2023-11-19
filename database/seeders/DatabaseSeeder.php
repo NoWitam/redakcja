@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             ArticleSeeder::class,
             ReactionSeeder::class,
             CommentsSeeder::class,
+            //AdvertisementSeeder::class
         ]);
 
         // \App\Models\User::factory(10)->create();

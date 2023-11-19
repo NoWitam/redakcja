@@ -9,7 +9,7 @@
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         @stack('styles')
-
+        @livewireStyles
     </head>
 
     <body>
@@ -57,7 +57,12 @@
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/simple-parallax-js@5.5.1/dist/simpleParallax.min.js"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
         @stack('scripts')
+
+        @livewireScripts
     </body>
 
 </html>

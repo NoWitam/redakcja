@@ -31,6 +31,8 @@ Route::get('/kategorie/{category:slug}/{subcategory:slug}', [CategoryController:
 
 Route::get('/artykuly/{article:slug}', [ArticleController::class, 'show'])->name('article');
 
+Route::get('/artykuly/{article:slug}/advertisement/{order}', [ArticleController::class, 'advertisement'])->name('article.advertisement');
+
 Route::get('/zaloguj', function() {
     Auth::login(User::find(1));
     //dd(Session::get('reason'));
@@ -40,6 +42,3 @@ Route::get('test', function () {
     $comments = Comment::cursorPaginate(12, ['*'], 'cursor', Cursor::fromEncoded(null));
     dd($comments);
 });
-
-
-Route::get('/parts/comments', [CommentController::class, 'index'])->name('parts.comments');
