@@ -5,55 +5,44 @@ namespace App\Livewire;
 use App\Interfaces\Commentable;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Collection;
-use Livewire\Attributes\Locked;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
-use Illuminate\Pagination\Cursor;
-use Livewire\WithPagination;
 
 class Comments extends Component
 {
-    use WithPagination;
-
-    #[Locked]
     public Commentable $commentable;
-    #[Locked]
+    public int $perPage;
     public string $sortType = "best";
-    #[Locked]
     public array $sortTypes = [
         "best",
         "newest"
     ];
     public $commentsCount;
-    public $comments;
-
-    public $nextCursor;
-
-    public $hasMorePages;
+    public $newComments;
+    public string $comment = '';
 
     public function mount()
     {
         $this->commentsCount = $this->commentable->comments()->count();
-
-        $this->comments = new Collection();
-
-        $this->loadComments();
+        $this->newComments = new Collection();
     }
 
-
-    public function loadComments()
+    public function create()
     {
-        if ($this->hasMorePages !== null  && ! $this->hasMorePages) {
-            return;
-        }
+        $validatedData = $this->validate([
+            'comment' => 'required|string|max:1024'
+        ]);
 
-        $comments = $this->getComments();
+        $this->newComments->prepend(
+            $this->commentable->comments()->create([
+                'user_id' => Auth::id(),
+                'content' => $validatedData['comment']
+            ])->load('user')
+        );
 
-        $this->comments->push(...$comments->items());
-
-        if ($this->hasMorePages = $comments->hasMorePages()) {
-            $this->nextCursor = $comments->nextCursor()->encode();
-        }
-        //$this->js("intializeShowMore()");
+        $this->comment = '';
+        $this->commentsCount++;
+        $this->emit('new-comments');
     }
 
     public function changeSortType($sortType)
@@ -61,13 +50,8 @@ class Comments extends Component
         if($sortType != $this->sortType) {
             if(in_array($sortType, $this->sortTypes)) {
                 $this->sortType = $sortType;
-                $this->nextCursor = null;
-                $this->comments = new Collection();
-                return;
             }
         }
-
-        $this->skipRender();
     }
 
     public function render()
@@ -87,13 +71,4 @@ class Comments extends Component
 
         return $comments;
     }
-
-    public function getComments()
-    {
-        $comments = $this->commentable->comments()->with('user');
-        $comments = $this->applySort($comments)->cursorPaginate(12, ['*'], 'cursor', Cursor::fromEncoded($this->nextCursor));
-
-        return $comments;
-    }
-
 }

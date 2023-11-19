@@ -4,33 +4,63 @@ import simpleParallax from 'simple-parallax-js';
 var images = document.querySelectorAll('.parallax-init');
 new simpleParallax(images);
 
-const elementIsVisibleInViewport = (el, partiallyVisible = false) => {
-    const { top, left, bottom, right } = el.getBoundingClientRect();
-    const { innerHeight, innerWidth } = window;
-    return partiallyVisible
-      ? ((top > 0 && top < innerHeight) ||
-          (bottom > 0 && bottom < innerHeight)) &&
-          ((left > 0 && left < innerWidth) || (right > 0 && right < innerWidth))
-      : top >= 0 && left >= 0 && bottom <= innerHeight && right <= innerWidth;
-};
+Livewire.on('new-comments', () => {
+    var comments = document.querySelectorAll(".comment.intialize");
 
-var scrolContainer = document.querySelector(".scroll-container");
-var scrollNav = document.querySelector(".scroll-nav");
 
-document.addEventListener("scroll", (event) => {
+    comments.forEach( (comment) => {
+        comment.classList.toggle("intialize");
 
-    if(scrollNav) {
-        if(elementIsVisibleInViewport(scrollNav, true)) {
-            var url = scrollNav.getAttribute("href");
-            scrollNav.remove();
+        var content = comment.querySelector(".comment-content");
 
-            var html = fetch(url).then( response => {
-                return response.text();
-            }).then(response => {
-                console.log(response);
-                scrolContainer.innerHTML += response;
-                scrollNav = document.querySelector(".scroll-nav");
+        // show more button
+        if (content.offsetHeight < content.scrollHeight) {
+            comment.querySelector(".show-more").style.display = "block";
+        }
+
+        // show add sub comment addSubComment
+        var buttonAdd = comment.querySelector('button[role="addSubComment"]');
+        var form = comment.querySelector('.comments-form');
+        var buttonHide = comment.querySelector('button[role="hideSubComment"]');
+
+        if(form) {
+            buttonAdd.addEventListener('click', () => {
+                form.style.display = "flex";
+            });
+
+            buttonHide.addEventListener('click', () => {
+                form.style.display = "none";
             });
         }
-    }
+
+        //show sub comments
+        var button = comment.querySelector('button[role="loadMore"]');
+        if(button) {
+            button.addEventListener('click', () => {
+                button.classList.toggle('active');
+            });
+        }
+
+    });
+
+
+})
+
+document.addEventListener("DOMContentLoaded", function () {
+    let images = document.querySelectorAll("img[data-src]");
+    function loadImagesLazily(e) {
+      for (let i = 0; i < images.length; i++) {
+        let rect = images[i].getBoundingClientRect();
+        if (images[i].hasAttribute("data-src")
+          && rect.bottom > 0 && rect.top < window.innerHeight
+          && rect.right > 0 && rect.left < window.innerWidth) {
+          images[i].setAttribute("src", images[i].getAttribute("data-src"));
+          images[i].removeAttribute("data-src");
+        }
+      }
+    };
+
+    window.addEventListener('scroll', loadImagesLazily);
+    window.addEventListener('resize', loadImagesLazily);
+    loadImagesLazily();
 });

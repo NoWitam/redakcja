@@ -39,12 +39,17 @@
                     <div class="article-section">
                         <h3> {{ $section->title }} </h3>
                         {!! $section->content !!}
+
+                        <img
+                            class="advertisement image-lazy"
+                            data-src="{{ route('article.advertisement', ["article" => $article->slug, "order" => $section->order]) }}"
+                        >
                     </div>
                 @endforeach
             </div>
 
             @livewire("reaction", ["reactionable" => $article], key("reactionable-" . $article::class . "-" . $article->id))
-            @livewire("comments", ["commentable" => $article], key("commentable-" . $article::class . "-" . $article->id))
+            @livewire("comments", ["commentable" => $article, "perPage" => 12], key("comments-" . "-" . $article::class . "-" . $article->id))
 
         </main>
 

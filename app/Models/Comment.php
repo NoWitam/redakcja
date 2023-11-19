@@ -13,6 +13,11 @@ class Comment extends Model implements Commentable, Reactionable
 {
     use HasFactory, HasComments, HasReactions;
 
+    protected $fillable = [
+        'user_id',
+        'content'
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
