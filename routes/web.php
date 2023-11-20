@@ -37,5 +37,5 @@ Route::get('/zaloguj', function() {
 })->name('login');
 
 Route::get('test', function () {
-
+    dd(User::all());
 });

@@ -13,11 +13,12 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            CategorySeeder::class,
-            ArticleSeeder::class,
-            ReactionSeeder::class,
-            CommentsSeeder::class,
+            //CategorySeeder::class,
+            //ArticleSeeder::class,
+            //ReactionSeeder::class,
+            //CommentsSeeder::class,
             //AdvertisementSeeder::class
+            ContentAiSeeder::class
         ]);
 
         // \App\Models\User::factory(10)->create();
