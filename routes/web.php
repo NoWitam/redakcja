@@ -39,6 +39,5 @@ Route::get('/zaloguj', function() {
 })->name('login');
 
 Route::get('test', function () {
-    $comments = Comment::cursorPaginate(12, ['*'], 'cursor', Cursor::fromEncoded(null));
-    dd($comments);
+    dd(User::all());
 });
