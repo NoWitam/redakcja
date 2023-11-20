@@ -47,8 +47,8 @@ Livewire.on('new-comments', () => {
 })
 
 document.addEventListener("DOMContentLoaded", function () {
-    let images = document.querySelectorAll("img[data-src]");
     function loadImagesLazily(e) {
+      let images = document.querySelectorAll("img[data-src]");
       for (let i = 0; i < images.length; i++) {
         let rect = images[i].getBoundingClientRect();
         if (images[i].hasAttribute("data-src")

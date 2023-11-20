@@ -42,7 +42,8 @@
 
                         <img
                             class="advertisement image-lazy"
-                            data-src="{{ route('article.advertisement', ["article" => $article->slug, "order" => $section->order]) }}"
+                            data-src="{{ route('article.advertisement', ["article" => $article->slug, "section" => $section->order]) }}"
+                            onerror="this.onerror=null; this.removeAttribute('src');"
                         >
                     </div>
                 @endforeach

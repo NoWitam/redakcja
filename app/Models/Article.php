@@ -4,15 +4,17 @@ namespace App\Models;
 
 use App\Interfaces\Commentable;
 use App\Interfaces\Reactionable;
+use App\Interfaces\Viewable;
 use App\Observers\SlugObserver;
 use App\Traits\HasComments;
 use App\Traits\HasReactions;
+use App\Traits\HasViews;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Article extends Model implements Reactionable, Commentable
+class Article extends Model implements Reactionable, Commentable, Viewable
 {
-    use HasFactory, HasReactions, HasComments;
+    use HasFactory, HasReactions, HasComments, HasViews;
 
     protected $casts = [
         'published_at' => 'date'
